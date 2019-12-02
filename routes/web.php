@@ -38,7 +38,7 @@ Route::post('segment', function (Request $request) {
 
     $this->finalseg->init();
 
-    return ['data' => $this->jieba->cut($input['string'])];
+    return $this->jieba->cut($input['string']);
 });
 
 Route::post('keyword', function (Request $request) {
@@ -64,5 +64,5 @@ Route::post('keyword', function (Request $request) {
         $result[] = $key;
     }
 
-    return ['data' => $result];
+    return $result;
 });
