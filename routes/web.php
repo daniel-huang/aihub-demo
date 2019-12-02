@@ -38,7 +38,7 @@ Route::post('segment', function (Request $request) {
 
     $this->finalseg->init();
 
-    return $cut_array = $this->jieba->cut($input['string']);
+    return ['data' => $this->jieba->cut($input['string'])];
 });
 
 Route::post('keyword', function (Request $request) {
@@ -58,6 +58,11 @@ Route::post('keyword', function (Request $request) {
     }
 
     $this->finalseg->init();
+    $res = JiebaAnalyse::extractTags($input['string'], 10);
+    $result = [];
+    foreach ($res as $key => $value) {
+        $result[] = $key;
+    }
 
-    return JiebaAnalyse::extractTags($input['string'], 10);
+    return ['data' => $result];
 });
